@@ -325,6 +325,7 @@ jQuery(function($){
 
   function log_status(text, to_populate) {
     console.log(text);
+    if(text=="chan closed"){window.close();}
     status.html(text.split('\n').join('<br/>'));
 
     if (to_populate && validated_form_data) {
@@ -534,7 +535,9 @@ jQuery(function($){
       title_element.text = url_opts_data.title || default_title;
       if (url_opts_data.command) {
         setTimeout(function () {
-          sock.send(JSON.stringify({'data': url_opts_data.command+'\r'}));
+          var decode = decodeURI(url_opts_data.command)
+          decode = decode.replaceAll('%3D', '=').replaceAll('%40', '@')
+          sock.send(JSON.stringify({'data': decode+'\r'}));
         }, 500);
       }
     };
