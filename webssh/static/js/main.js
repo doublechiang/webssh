@@ -536,7 +536,7 @@ jQuery(function($){
       if (url_opts_data.command) {
         setTimeout(function () {
           var decode = decodeURI(url_opts_data.command)
-          decode = decode.replaceAll('%3D', '=').replaceAll('%40', '@')
+          decode = decode.replaceAll('%3D', '=').replaceAll('%40', '@').replaceAll('%3A', ':')
           sock.send(JSON.stringify({'data': decode+'\r'}));
         }, 500);
       }
